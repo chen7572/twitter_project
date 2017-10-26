@@ -1,0 +1,29 @@
+---
+title: "Hurricane Harvey Twitter Images"
+author: "Chen Chen"
+date: "10/25/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 10 most popular images during Hurricane Harvey harvested from Twitter 
+
+Below are top ten images from Twitter that are related to Hurricane Harvey. Contrary to my assumption of scientific images such as satellite images ranking the top, video footages and amateur photos dominate the top 10 list. 
+
+`r media <- read.table("HurricaneHarvey_media.txt",stringsAsFactors = F)`
+`r image_sort <- sort(table(media$V2),decreasing = T) `
+`r image_freq_df <- as.data.frame(image_sort,stringsAsFactors = F) `
+
+```{r,results='asis',echo=FALSE}
+for (i in 1:10){
+  image_file <- paste0('\n![](twitter_images/img',i,'.jpg) \n')
+  cat('\n')
+  cat('## Image #',i,"shared",image_freq_df$Freq[i],"times \n")
+  cat(image_file)
+  cat('\n')
+}
+```
+
